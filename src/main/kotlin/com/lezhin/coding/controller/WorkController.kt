@@ -29,7 +29,7 @@ class WorkController(private val workService: WorkService) {
 
     @Description("작품의 금액을 변경함(무료, 유료(100~500))")
     @PostMapping("/{workId}/change")
-    fun changeWork(@PathVariable workId: Long, @RequestParam(required = false, defaultValue = "0") amount: Int): ResponseEntity<Any> {
+    fun changeWorkAmount(@PathVariable workId: Long, @RequestParam(required = false, defaultValue = "0") amount: Int): ResponseEntity<Any> {
         val work = workService.changeWorkAmount(workId, amount)
         val response = work?.let { WorkResponse.from(it) }
         val apiResponse = ApiResponse(true, null, response)

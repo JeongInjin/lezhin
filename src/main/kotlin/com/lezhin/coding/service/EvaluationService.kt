@@ -1,8 +1,8 @@
 package com.lezhin.coding.service
 
+import com.lezhin.coding.common.exception.BusinessException
 import com.lezhin.coding.domain.Evaluation
 import com.lezhin.coding.domain.dto.Evaluation.EvaluationRequest
-import com.lezhin.coding.common.exception.BusinessException
 import com.lezhin.coding.infrastructure.evaluation.EvaluationRepository
 import com.lezhin.coding.infrastructure.user.UserRepository
 import com.lezhin.coding.infrastructure.work.WorkRepository
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 class EvaluationService(
     private val evaluationRepository: EvaluationRepository,
     private val userRepository: UserRepository,
-    private val workRepository: WorkRepository
+    private val workRepository: WorkRepository,
 ) {
 
     @Transactional
@@ -32,6 +32,7 @@ class EvaluationService(
 
         val evaluation = Evaluation()
         evaluation.setData(user, work, request.likeDislike, request.comment)
+        evaluationRepository.save(evaluation)
         // 작품 등록 후 좋아요/싫어요 count update
         work.likeDislikeCountUpdate(request.likeDislike)
 

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface HistoryRepository : JpaRepository<History, Long> {
     fun findAllByWorkIdAndActionTypeOrderByCreatedAtDesc(workId: Long, actionType: ActionType): List<History>
+    fun findByUserId(userId: Long): List<History>
 }
 

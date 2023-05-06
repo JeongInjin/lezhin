@@ -37,6 +37,6 @@ class User : Auditing() {
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
     var evaluations: MutableList<Evaluation> = mutableListOf()
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     var histories: MutableList<History> = mutableListOf()
 }
